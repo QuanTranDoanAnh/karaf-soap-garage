@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	default-activation="lazy">
+
+	<service ref="carService"
+		interface="vn.quantda.example.garageSoapWS.service.CarService">
+		<service-properties>
+			<entry key="service.exported.interfaces" value="*" />
+		</service-properties>
+	</service>
+
+	<!-- OSGI application runtimes treat remote services differently from local 
+		ones because of the default invocation semantics that are different (passing 
+		by local reference versus passing by remote value). To prevent an application 
+		from accidentally calling an exported service that is uniquely named by a 
+		call by "passage of value", it is necessary to hide the local lookup. The 
+		solution is to export the same bean twice: once for remote calls and another 
+		for local calls. In other words, we add another element with the same configuration 
+		but without the property "service.exported.interfaces" -->
+	<service ref="carService" interface="vn.quantda.example.garageSoapWS.service.CarService" />
+
+	<bean id="carService" class="vn.quantda.example.garageSoapWS.service.CarServiceImpl">
+		<property name="carDao" ref="carDao" />
+	</bean>
+
+	<reference id="carDao"
+		interface="vn.quantda.example.garageSoapWS.model.dao.CarDao" />
+
+</blueprint>

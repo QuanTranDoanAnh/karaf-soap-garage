@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<!-- Ajout de features au repository -->
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.2.2/xml/features</repository>
+    
+    <feature name='${project.artifactId}' description='${project.name}' version='${project.version}'>
+        <details>${project.description}</details>
+        <!-- <config>foo=bar</config> -->
+        
+        <!-- Added the capability "osgi.service" because the manifest of the pax-logging bundle, which provides the LogService service in Karaf, is not filled correctly.
+         This service does not advertise in the Provide-Capability field. Since version 4.0.5 Karaf, this is a problem because Karaf verifies
+         where he can recover the LogService service. Since he sees no bundle capable of providing this service, we have an error loading our service in Karaf.
+         "missing requirement [garageSoapWS-model/1.0.0] osgi.service; effective = = active; filter: =" (objectClass = org.osgi.service.log.LogService) "]"
+         This will happen as long as the pax-login bundle on Karaf is not updated.
+         To test if the correction was made in the next versions of pax-logging, just delete the "capability" tag below and see if an error is generated in the logs -->
+        <capability>
+        	osgi.service;effective:=active;objectClass=org.osgi.service.log.LogService
+         </capability>
+        <!-- Installation de la feature cxf -->
+        <feature version="3.2.2">cxf</feature>
+
+        <!-- Installation de pax-jdbc pour creer les DataSourceFactory -->
+        <!-- La creation des DataSources se fait par depot d'un fichier org.ops4j.datasource-*.cfg 
+        (ou "*" doit etre remplace par le nom de la DataSource) dans le repertoire "/etc" de Karaf -->
+        <feature>pax-jdbc</feature>
+        <feature>pax-jdbc-config</feature>
+        <feature>pax-jdbc-pool-dbcp2</feature>
+
+        <!-- Installation de hibernate-osgi 5.2.9.Final  -->
+        <feature>hibernate-orm</feature>
+        
+        <!-- Installation de la feature jdbc embarquee dans Karaf pour interroger les DataSources depuis l'invite de commande Karaf -->
+        <feature>jdbc</feature>
+         
+        <feature version="5.2.9.Final">hibernate</feature>
+        <feature version="2.6.1">jpa</feature>
+        <feature version="2.0.0">transaction</feature>
+        <feature version="4.1.5">jndi</feature>
+
+        <!-- Installation du driver PostgreSQL en tant que bundle -->
+        <bundle>mvn:com.h2database/h2/1.4.197</bundle>
+
+        <!-- Maven dependencies appearing in the garageWS / pom.xml file are placed in the archive.
+         and whose services are not yet in Karaf (command service: list) -->
+        <bundle>mvn:org.slf4j/slf4j-api/1.6.1</bundle>
+        <bundle>mvn:org.slf4j/slf4j-simple/1.6.1</bundle>
+       
+                
+        <!-- On renseigne les bundles que nous avons developpes et qui seront utiles au service web REST  
+        le chemin de ces bundles est de la forme "mvn:groupId/artifactId/version" ou :
+            - groupeId est la valeur de la balise "/project/parent/groupId" du fichier "pom.xml" de chaque module
+            - artefactId est la valeur de la balise "/project/artefactId" du fichier "pom.xml" de chaque module
+            - version est la valeur de la balise "/project/parent/version" du fichier "pom.xml" de chaque module -->
+        <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-model/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-service/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-jaxws/1.0.0-SNAPSHOT</bundle>   
+    </feature>
+
+</features>

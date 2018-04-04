@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>vn.quantda.example.garageSoapWS</groupId>
+	<artifactId>garageSoapWS-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>garageSoapWS-parent</name>
+
+	<properties>
+		<cxf.version>3.2.2</cxf.version>
+		<jpa.version>2.1.1</jpa.version>
+		<osgi.version>6.0.0</osgi.version>
+		<osgi.log.version>1.3.0</osgi.log.version>
+		<slf4j.version>1.7.21</slf4j.version>
+		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>javax.persistence</artifactId>
+				<version>${jpa.version}</version>
+				<scope>provided</scope> <!-- The container or JDK provide dependencies -->
+			</dependency>
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<version>${osgi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.service.log</artifactId>
+				<version>${osgi.log.version}</version>
+				<scope>provided</scope><!-- The container or JDK provide dependencies -->
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>provided</scope><!-- The container or JDK provide dependencies -->
+			</dependency>
+			
+			<dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${cxf.version}</version>
+                <scope>provided</scope> <!-- The container or JDK provide dependencies -->
+            </dependency>
+            
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>${cxf.version}</version>
+                <scope>provided</scope> <!-- The container or JDK provide dependencies -->
+            </dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<maxmem>256M</maxmem>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>garageSoapWS-model</module>
+    <module>garageSoapWS-service</module>
+    <module>garageSoapWS-jaxws</module>
+    <module>garageSoapWS-kar</module>
+  </modules>
+</project>
