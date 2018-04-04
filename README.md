@@ -13,5 +13,5 @@ Create bundles to expose SOAP web services in Apache Karaf 4.1.5. Using JPA for 
 1. Clone this repository to local
 2. Run `mvn clean install` from the root project folder
 3. Start Karaf
-4. From Karaf, add feature repo by running `feature:repo-add mvn:vn.quantda.example.garageSoapWS/garageSoapWS-kar/1.0.0-SNAPSHOT/xml/features`.
-5. Run `feature:install garageSoapWS-kar`
+4. From Karaf, add feature repo by running `feature:repo-add mvn:vn.quantda.example.garageSoapWS/garageWS-kar/1.0.0-SNAPSHOT/xml/features`.
+5. Run `feature:install garageWS-kar`
