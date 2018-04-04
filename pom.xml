@@ -78,5 +78,6 @@
     <module>garageSoapWS-service</module>
     <module>garageSoapWS-jaxws</module>
     <module>garageSoapWS-kar</module>
+    <module>garageWS-custom-distri</module>
   </modules>
 </project>

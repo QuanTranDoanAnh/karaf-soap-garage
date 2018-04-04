@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- Licensed to the Apache Software Foundation (ASF) under one or more 
+		contributor license agreements. See the NOTICE file distributed with this 
+		work for additional information regarding copyright ownership. The ASF licenses 
+		this file to You under the Apache License, Version 2.0 (the "License"); you 
+		may not use this file except in compliance with the License. You may obtain 
+		a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
+		required by applicable law or agreed to in writing, software distributed 
+		under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+		OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+		the specific language governing permissions and limitations under the License. -->
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>garageSoapWS-parent</artifactId>
+		<groupId>vn.quantda.example.garageSoapWS</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>garageWS-custom-distri</artifactId>
+	<packaging>karaf-assembly</packaging>
+
+	<name>garageWS-custom-distri</name>
+	<description>Distribution of personalized Karaf garageWS</description>
+
+	<repositories>
+		<repository>
+			<id>central.maven</id>
+			<name>M2 Central repository</name>
+			<url>http://central.maven.org/maven2</url>
+			<releases>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+			
+		<!-- Apache ServiceMix repository (for region) -->
+		<repository>
+			<id>apache.servicemix.m2</id>
+			<name>Apache ServiceMix M2 repository</name>
+			<url>http://svn.apache.org/repos/asf/servicemix/m2-repo</url>
+			<releases>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<!-- OPS4J SNAPSHOT repository -->
+		<repository>
+			<id>ops4j.sonatype.snapshots.deploy</id>
+			<name>OPS4J snapshot repository</name>
+			<url>https://oss.sonatype.org/content/repositories/ops4j-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+		<!-- Apache SNAPSHOT -->
+		<repository>
+			<id>apache.snapshots.deploy</id>
+			<name>Apache snapshot repository</name>
+			<url>https://repository.apache.org/content/groups/snapshots-group</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>framework</artifactId>
+			<version>4.1.5</version>
+			<type>kar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>standard</artifactId>
+			<version>4.1.5</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>spring</artifactId>
+			<version>4.1.5</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>enterprise</artifactId>
+			<version>4.1.5</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Installation de la feature propre a notre projet. Cette feature a 
+			ete generee par le module ""module-kar" -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>garageSoapWS-kar</artifactId>
+			<version>${project.version}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Declarations des dependances necessaires a notre projet -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>garageSoapWS-model</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>garageSoapWS-service</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>garageSoapWS-jaxws</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/filtered-resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-maven-plugin</artifactId>
+				<version>4.1.5</version>
+				<extensions>true</extensions>
+				<configuration>
+
+					<!-- La balise <bootFeatures> permet de demander a Karaf lors de son 
+						demarrage de demarrer les features. Le nom des features est obtenu dans le 
+						fichier features.xml dans la section <dependencies>. -->
+					<bootFeatures>
+						<!-- Features liees a Karaf standard -->
+						<feature>wrap</feature>
+						<feature>shell</feature>
+						<feature>shell-compat</feature>
+						<feature>feature</feature>
+						<feature>jaas</feature>
+						<feature>ssh</feature>
+						<feature>management</feature>
+						<feature>bundle</feature>
+						<feature>config</feature>
+						<feature>deployer</feature>
+						<feature>diagnostic</feature>
+						<feature>feature</feature>
+						<feature>instance</feature>
+						<feature>kar</feature>
+						<feature>log</feature>
+						<feature>package</feature>
+						<feature>service</feature>
+						<feature>system</feature>
+						<feature>webconsole</feature>
+
+
+						<!-- Features liees a Karaf entreprise et necessaires a notre projet -->
+						<feature>jpa</feature>
+
+						<!-- Demarrage des features propres a notre projet. "pax-jdbc", "apache-cxf" 
+							et "hibernate-osgi 5.2.6.final" sont recuperes depuis Maven grace au fichier 
+							feature.xml du module "module-kar" -->
+						<feature>pax-jdbc-pool-dbcp2</feature>
+
+						<!-- Installation la feature de notre projet -->
+						<feature>garageSoapWS-kar</feature>
+					</bootFeatures>
+
+					<!-- <installedFeatures> installedFeatures installe les features dans 
+						le repertoire ${KARAF_HOME}/system directory mais l'utilisateur devra l'installer 
+						manuellement via la command feature:install <feature>pax-jdbc</feature> <feature>pax-jdbc-config</feature> 
+						<feature>pax-jdbc-pool-dbcp2</feature> </installedFeatures> -->
+
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>process-resources</id>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
