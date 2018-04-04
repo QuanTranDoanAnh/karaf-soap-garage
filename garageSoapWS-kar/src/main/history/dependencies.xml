@@ -16,6 +16,7 @@
         <bundle>mvn:org.slf4j/slf4j-simple/1.6.1</bundle>
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-jaxws/1.0.0-SNAPSHOT</bundle>
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-model/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-proxy/1.0.0-SNAPSHOT</bundle>
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-service/1.0.0-SNAPSHOT</bundle>
     </feature>
 </features>

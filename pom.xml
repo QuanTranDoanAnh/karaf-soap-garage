@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>vn.quantda.example.garageSoapWS</groupId>
 	<artifactId>garageSoapWS-parent</artifactId>
@@ -16,7 +17,7 @@
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -36,27 +37,27 @@
 				<version>${osgi.log.version}</version>
 				<scope>provided</scope><!-- The container or JDK provide dependencies -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 				<scope>provided</scope><!-- The container or JDK provide dependencies -->
 			</dependency>
-			
+
 			<dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                <version>${cxf.version}</version>
-                <scope>provided</scope> <!-- The container or JDK provide dependencies -->
-            </dependency>
-            
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http</artifactId>
-                <version>${cxf.version}</version>
-                <scope>provided</scope> <!-- The container or JDK provide dependencies -->
-            </dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>${cxf.version}</version>
+				<scope>provided</scope> <!-- The container or JDK provide dependencies -->
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-transports-http</artifactId>
+				<version>${cxf.version}</version>
+				<scope>provided</scope> <!-- The container or JDK provide dependencies -->
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -75,9 +76,10 @@
 	</build>
 	<modules>
 		<module>garageSoapWS-model</module>
-    <module>garageSoapWS-service</module>
-    <module>garageSoapWS-jaxws</module>
-    <module>garageSoapWS-kar</module>
-    <module>garageWS-custom-distri</module>
-  </modules>
+		<module>garageSoapWS-service</module>
+		<module>garageSoapWS-jaxws</module>
+		<module>garageSoapWS-proxy</module>
+		<module>garageSoapWS-kar</module>
+		<module>garageWS-custom-distri</module>
+	</modules>
 </project>
