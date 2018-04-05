@@ -11,17 +11,21 @@
 	language governing permissions and limitations under the License. -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
 	default-activation="lazy"
-	xmlns:cm="http://arie.apache.org/blueprint/xmlns/blueprint-cm/v1.3.0"
-	xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws">
-
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws"
+	xsi:schemaLocation="
+	 	http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+	 	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://svn.apache.org/repos/asf/aries/trunk/blueprint/blueprint-cm/src/main/resources/org/apache/aries/blueprint/compendium/cm/blueprint-cm-1.1.0.xsd
+	 "
+	>
 	<cm:property-placeholder persistent-id="vn.quantda.example.garageSoapWS.proxy"
-		update-stratgy="reload">
-		<cm:default-properties>
-			<!-- Service invocation address -->
-			<cm:property name="carSoapService.URL" value="http://localhost:8181/cxf/carService" />
-		</cm:default-properties>
-	</cm:property-placeholder>
-
+        update-strategy="reload">
+        <cm:default-properties>
+            <!-- Adresse d'invocation du service -->
+            <cm:property name="carServiceSoap.URL" value="http://localhost:8181/cxf/carService" />
+        </cm:default-properties>
+    </cm:property-placeholder>
 	<!-- Export, as an OSGI service, the SOAP service consumed by the client. 
 		     This is done by encapsulating the SOAP service client in an OSGI service. 
 		     The web client interface will be totally independent of cxf. -->
@@ -33,7 +37,7 @@
 	<!-- Adding a client to query the SOAP web service -->
 	<jaxws:client id="carSoapServiceProxy"
 		serviceClass="vn.quantda.example.garageSoapWS.jaxws.CarSoapService"
-		address="${carSoapService.URL}" />
+		address="${carServiceSoap.URL}" />
 
 
 </blueprint>

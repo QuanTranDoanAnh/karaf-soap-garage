@@ -4,6 +4,7 @@
         <feature prerequisite="false" dependency="false">cxf</feature>
         <feature prerequisite="false" dependency="false">hibernate</feature>
         <feature prerequisite="false" dependency="false">hibernate-orm</feature>
+        <feature prerequisite="false" dependency="false">http-whiteboard</feature>
         <feature prerequisite="false" dependency="false">jdbc</feature>
         <feature prerequisite="false" dependency="false">jndi</feature>
         <feature prerequisite="false" dependency="false">jpa</feature>
@@ -18,5 +19,6 @@
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-model/1.0.0-SNAPSHOT</bundle>
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-proxy/1.0.0-SNAPSHOT</bundle>
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-service/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-webui/1.0.0-SNAPSHOT</bundle>
     </feature>
 </features>

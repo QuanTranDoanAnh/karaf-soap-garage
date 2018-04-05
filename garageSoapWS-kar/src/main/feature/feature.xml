@@ -54,6 +54,7 @@
         <feature version="2.6.1">jpa</feature>
         <feature version="2.0.0">transaction</feature>
         <feature version="4.1.5">jndi</feature>
+        <feature version="4.1.5">http-whiteboard</feature>
 
         <!-- Installation du driver PostgreSQL en tant que bundle -->
         <bundle>mvn:com.h2database/h2/1.4.197</bundle>
@@ -73,6 +74,7 @@
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-service/1.0.0-SNAPSHOT</bundle>
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-jaxws/1.0.0-SNAPSHOT</bundle>   
         <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-proxy/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:vn.quantda.example.garageSoapWS/garageSoapWS-webui/1.0.0-SNAPSHOT</bundle>
     </feature>
 
 </features>
